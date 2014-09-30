@@ -81,7 +81,7 @@ except:
 	
 penalty = [x for x in sys.argv if x.startswith('-p=')]
 try:
-	penalty = int(time[0].replace('-p=',''))
+	penalty = int(penalty[0].replace('-p=',''))
 except:
 	penalty = 24
 
