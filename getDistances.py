@@ -100,7 +100,6 @@ towns = struct['towns']
 
 
 pts = []
-pairs = set()
 xLen = len(mapped)
 yLen = len(mapped[0])
 
@@ -119,34 +118,48 @@ print numPts,"available spaces found"
 print "Preparing to fill expected values set of approximate size",(numPts-1)*numTowns
 
 sleep(1)
+writeTo = 0
+chunkLimit = 100000; iter = 0 
+pairs = set()
 
-iter = 0
+for i in range(cores):
+	listOut = open('%s/netSlice%s.txt' % (name,i),"w")
+	listOut.close()
+	
 for i in towns:
 	for j in pts:
 		pairs.add(str(rank(i[0],i[1],j[0],j[1])))
 		iter += 1
-		if iter%250000 == 0:
-			print iter
+		if iter%500000 == 0:
+			print iter,writeTo
+			listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
+			for line in pairs:
+				listOut.write(line+'\n')
+			listOut.close()
+			pairs = set()
+			writeTo += 1
+			if writeTo == cores:
+				writeTo = 0
 
-numPairs = len(pairs)
-pairs = list(pairs)
-shuffle(pairs)
-
-print numPairs, "total combinations found"
+listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
+for line in pairs:
+	listOut.write(line+'\n')
+listOut.close()
+				
 
 print "Preparing to generate qsubs"
 
-block = int(ceil(numPairs)/float(cores))
+#block = int(ceil(numPairs)/float(cores))
 
 if not os.path.exists(name):
 	os.makedirs(name)
 
 workingDir = os.getcwd() + '/' 
 for i in range(cores):
-	chunk = pairs[block*i:block*(i+1)]
-	listOut = open('%s/netSlice%s.txt' % (name,i),"w")
-	listOut.write('\n'.join(chunk))
-	listOut.close()
+	#chunk = pairs[block*i:block*(i+1)]
+	#listOut = open('%s/netSlice%s.txt' % (name,i),"w")
+	#listOut.write('\n'.join(chunk))
+	#listOut.close()
 	makeQsubs(name,i,qsubLoaded,workingDir+netName+' '+str(penalty))
 
 print "Waiting for available slots"
@@ -161,11 +174,3 @@ print "Beginning job submission"
 for i in range(cores):
 	subprocess.call(["qsub",qsubName(name,i,workingDir)])
 	sleep(5)
-	
-count = 1
-while count != 0:
-	count = getNumProc(pool,cluster)
-	sleep(5)
-
-print "Experiment complete, please merge resultant dictionaries with dictMerge.py"
-
