@@ -132,7 +132,7 @@ for i in towns:
 		iter += 1
 		if iter%500000 == 0:
 			print iter,writeTo
-			listOut = open(listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
+			listOut = open(listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b"))
 			for line in pairs:
 				listOut.write(line+'\n')
 			listOut.close()
