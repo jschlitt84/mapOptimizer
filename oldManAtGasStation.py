@@ -62,7 +62,7 @@ def getNet(listed,network,penalty):
 	return merged
 
 fileIn = open(sys.argv[1])
-listed = fileIn.readlines()
+listed = list(set(fileIn.readlines()))
 fileIn.close()
 
 pickleIn = open(sys.argv[3],'rb')	
