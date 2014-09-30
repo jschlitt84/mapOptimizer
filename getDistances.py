@@ -148,7 +148,7 @@ while count >30:
 
 print "Beginning job submission"
 for i in range(cores):
-	subprocess.call(["qsub",qsubName(name,pos,workingDir)])
+	subprocess.call(["qsub",qsubName(name,i,workingDir)])
 	sleep(5)
 	
 count = 1
