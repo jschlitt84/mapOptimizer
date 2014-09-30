@@ -144,7 +144,8 @@ print "Waiting for available slots"
 
 count = 31
 while count >30:
-	count = len(os.popen("qstat | grep "+name).read().split('\n'))
+	running = [item for item in (os.popen("qstat").read().split('\n')) if ' C ' not in item]
+	count = len(running)
 	sleep(5)
 
 print "Beginning job submission"
