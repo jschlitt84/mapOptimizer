@@ -132,12 +132,13 @@ block = int(ceil(numPairs)/float(cores))
 if not os.path.exists(name):
 	os.makedirs(name)
 
+workingDir = os.getcwd() + '/' 
 for i in range(cores):
 	chunk = pairs[block*i:block*(i+1)]
 	listOut = open('%s/netSlice%s.txt' % (name,i),"w")
 	listOut.write('\n'.join(chunk))
 	listOut.close()
-	makeQsubs(name,i,qsubLoaded,netName)
+	makeQsubs(name,i,qsubLoaded,workingDir + netName)
 
 print "Waiting for available slots"
 
@@ -148,7 +149,7 @@ while count >30:
 
 print "Beginning job submission"
 for i in range(cores):
-	subprocess.call(["qsub",qsubName(name,i,os.getcwd() + '/' )])
+	subprocess.call(["qsub",qsubName(name,i,workingDir)])
 	sleep(5)
 	
 count = 1
