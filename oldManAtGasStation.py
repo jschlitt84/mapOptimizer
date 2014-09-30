@@ -58,7 +58,7 @@ def getStats(listed,network):
             p.join()
         maxDist = max(merged.values())
         for key,item in merged.iteritems():
-        	if item = -1:
+        	if item == -1:
         		merged[key] = 2*maxDist
 	return merged
 
