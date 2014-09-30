@@ -73,16 +73,22 @@ try:
 except:
 	name = 'mapOpOut'
 
-time = [x for x in sys.argv if x.startswith('-n=')]
+time = [x for x in sys.argv if x.startswith('-t=')]
 try:
-	time = int(cores[0].replace('-n=',''))
+	time = int(time[0].replace('-t=',''))
 except:
 	time = 24
+	
+penalty = [x for x in sys.argv if x.startswith('-p=')]
+try:
+	penalty = int(time[0].replace('-p=',''))
+except:
+	penalty = 24
 
 qsubLoaded = open(qsub).readlines()
 
 
-print "Cores: %s   Qsub: %s   Name: %s   Time: %s" % (cores,qsub,name,time)
+print "Cores: %s   Qsub: %s   Name: %s   Time: %s   Penalty: %s" % (cores,qsub,name,time,penalty)
 
 struct = pickle.load(pickleIn)
 pickleIn.close()
@@ -138,7 +144,7 @@ for i in range(cores):
 	listOut = open('%s/netSlice%s.txt' % (name,i),"w")
 	listOut.write('\n'.join(chunk))
 	listOut.close()
-	makeQsubs(name,i,qsubLoaded,workingDir + netName)
+	makeQsubs(name,i,qsubLoaded,workingDir+netName+' '+str(penalty))
 
 print "Waiting for available slots"
 
