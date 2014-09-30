@@ -1,0 +1,10 @@
+#!/bin/bash
+#PBS -lwalltime=02:00:00
+#PBS -lnodes=1:ppn=8
+#PBS -W group_list=pecos
+#PBS -q pecos_q@pecosq
+#PBS -A pecos
+#PBS -N $EXPNAME$EXPPOS
+#PBS -o $EXPDIRECTORY$EXPNAME/$EXPNAME$EXPPOS.qlog
+#PBS -j oe
+/apps/packages/epd/7.3-1/bin/python2.7 $EXPDIRECTORY/oldManAtGasStation.py $EXPDIRECTORY/$EXPNAME/netSlice$EXPPOS.txt $EXPPOS $ARGS
