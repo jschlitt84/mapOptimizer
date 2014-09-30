@@ -161,11 +161,3 @@ print "Beginning job submission"
 for i in range(cores):
 	subprocess.call(["qsub",qsubName(name,i,workingDir)])
 	sleep(5)
-	
-count = 1
-while count != 0:
-	count = getNumProc(pool,cluster)
-	sleep(5)
-
-print "Experiment complete, please merge resultant dictionaries with dictMerge.py"
-
