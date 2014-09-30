@@ -56,10 +56,9 @@ def getStats(listed,network,penalty):
             merged.update(out_q.get())
         for p in processes:
             p.join()
-        maxDist = max(merged.values())
         for key,item in merged.iteritems():
         	if item == -1:
-        		merged[key] = 2*maxDist
+        		merged[key] = penalty
 	return merged
 
 fileIn = open(sys.argv[1])
