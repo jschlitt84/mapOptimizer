@@ -36,7 +36,7 @@ def findDist(network,pts,core,out_q):
     out_q.put(distances) 
     
 
-def getStats(listed,network):
+def getStats(listed,network,penalty):
 	"""Return distance stats"""
 	cores = cpu_count()
         out_q = Queue()
@@ -72,7 +72,7 @@ pickleIn.close()
 
 network = struct['network']
 
-distDict = getStats(listed,network)
+distDict = getStats(listed,network,sys.argv[4])
 print distDict
 #for key,item in distDict.iteritems():
 #	print key,item
