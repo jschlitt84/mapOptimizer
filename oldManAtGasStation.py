@@ -21,6 +21,7 @@ def rank(x1,y1,x2,y2):
 def findDist(network,pts,core,out_q):
     t1 = datetime.datetime.now()
     distances = dict(); count = 0
+    toDo = len(pts)
     print "Process %s starting run with %s entries" % (core,len(pts))
     pts = [list(eval(pt.replace('\n',''))) for pt in pts]
     for p in pts:
@@ -28,8 +29,8 @@ def findDist(network,pts,core,out_q):
 
 	distances[str(rank(p[0],p[1],p[2],p[3]))] = length
 	count += 1
-	if count%1 == 0:
-		print 'Core: %s   Count: %s   Length: %s' % (core,count,length)
+	if count%250 == 0:
+		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
     out_q.put(distances) 
     
@@ -66,7 +67,7 @@ pickleIn.close()
 
 network = struct['network']
 
-distDict = getStats(listed[0:30],network)
+distDict = getStats(listed,network)
 print distDict
 #for key,item in distDict.iteritems():
 #	print key,item
