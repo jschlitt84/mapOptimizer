@@ -81,9 +81,9 @@ except:
 	
 penalty = [x for x in sys.argv if x.startswith('-p=')]
 try:
-	penalty = int(time[0].replace('-p=',''))
+	penalty = int(penalty[0].replace('-p=',''))
 except:
-	penalty = 24
+	penalty = 'sumsum'
 
 qsubLoaded = open(qsub).readlines()
 
@@ -103,6 +103,9 @@ pts = []
 pairs = set()
 xLen = len(mapped)
 yLen = len(mapped[0])
+
+if penalty == 'sumsum':
+	penalty = xLen+yLen
 
 for x in range(xLen):
 	for y in range(yLen):
