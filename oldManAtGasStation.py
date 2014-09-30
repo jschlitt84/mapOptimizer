@@ -7,7 +7,6 @@ from multiprocessing import Process, Queue, cpu_count
 from math import ceil
 from time import sleep
 
-
 def rank(x1,y1,x2,y2):
     if x1 < x2:
         return x1,y1,x2,y2
@@ -25,8 +24,10 @@ def findDist(network,pts,core,out_q):
     print "Process %s starting run with %s entries" % (core,len(pts))
     pts = [list(eval(pt.replace('\n',''))) for pt in pts]
     for p in pts:
-	length = nx.shortest_path_length(network,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
-
+    	try:
+	     length = nx.shortest_path_length(network,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
+	except:
+	     length = -1
 	distances[str(rank(p[0],p[1],p[2],p[3]))] = length
 	count += 1
 	if count%250 == 0:
@@ -55,6 +56,10 @@ def getStats(listed,network):
             merged.update(out_q.get())
         for p in processes:
             p.join()
+        maxDist = max(merged.values())
+        for key,item in merged.iteritems():
+        	if item = -1:
+        		merged[key] = 2*maxDist
 	return merged
 
 fileIn = open(sys.argv[1])
