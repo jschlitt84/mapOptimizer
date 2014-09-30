@@ -141,7 +141,7 @@ for i in towns:
 			if writeTo == cores:
 				writeTo = 0
 
-listOut = open(listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
+listOut = open(listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b"))
 for line in pairs:
 	listOut.write(line+'\n')
 listOut.close()
