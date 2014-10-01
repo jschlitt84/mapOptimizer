@@ -141,13 +141,15 @@ for i in towns:
 			if writeTo == cores:
 				writeTo = 0
 
+if not os.path.exists(name):
+	os.makedirs(name)
+
+
 listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
 for line in pairs:
 	listOut.write(line+'\n')
 listOut.close()
-				
-if not os.path.exists(name):
-	os.makedirs(name)
+			
 
 print "Preparing to generate qsubs"
 
