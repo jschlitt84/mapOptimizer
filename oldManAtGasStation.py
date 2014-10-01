@@ -78,7 +78,7 @@ print distDict
 
 del listed; del network
 
-pickleOut = open('/'.join(sys.argv[3].split('/')[0:-1])+'/DistDict%s.pickle' % sys.argv[2],"wb")
+pickleOut = open('/'.join(sys.argv[1].split('/')[0:-1])+'/DistDict%s.pickle' % sys.argv[2],"wb")
 cPickle.dump(distDict, pickleOut)
 pickleOut.close()
 sleep(3)
