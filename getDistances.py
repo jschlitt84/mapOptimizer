@@ -146,13 +146,12 @@ for line in pairs:
 	listOut.write(line+'\n')
 listOut.close()
 				
+if not os.path.exists(name):
+	os.makedirs(name)
 
 print "Preparing to generate qsubs"
 
 #block = int(ceil(numPairs)/float(cores))
-
-if not os.path.exists(name):
-	os.makedirs(name)
 
 workingDir = os.getcwd() + '/' 
 for i in range(cores):
