@@ -122,6 +122,10 @@ writeTo = 0
 chunkLimit = 100000; iter = 0 
 pairs = set()
 
+if not os.path.exists(name):
+	os.makedirs(name)
+
+
 for i in range(cores):
 	listOut = open('%s/netSlice%s.txt' % (name,i),"w")
 	listOut.close()
@@ -141,18 +145,16 @@ for i in towns:
 			if writeTo == cores:
 				writeTo = 0
 
+
 listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
 for line in pairs:
 	listOut.write(line+'\n')
 listOut.close()
-				
+			
 
 print "Preparing to generate qsubs"
 
 #block = int(ceil(numPairs)/float(cores))
-
-if not os.path.exists(name):
-	os.makedirs(name)
 
 workingDir = os.getcwd() + '/' 
 for i in range(cores):
