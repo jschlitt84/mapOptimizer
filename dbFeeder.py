@@ -4,7 +4,7 @@ import sys
 dbType = sys.argv[1]
 nodes = int(sys.argv[3])
 dbName = sys.argv[2]
-files = ['%s/%s%s.pickle' % (dbName,dbName,i) for i in range(nodes)]
+files = ['%s/DistDict%s.pickle' % (dbName,i) for i in range(nodes)]
 
 print "Connecting to database:", sys.argv[2]
 
