@@ -35,7 +35,7 @@ elif dbType == 'dbm':
         print "Preparing to load file", dictFile, "from pickle"
         loaded = cPickle.load(inFile); inFile.close()
         print "Inserting iteratively from file", dictFile, "to DB"
-        for key in loaded.keys()
+        for key in loaded.keys():
             db[key] = loaded[key]
         del loaded
 
