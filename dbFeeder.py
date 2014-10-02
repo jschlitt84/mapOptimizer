@@ -28,7 +28,7 @@ if dbType == 'mongo':
         
 elif dbType == 'dbm':
     import dbm
-    db = dbm.open(dbName+'/'+dbName+'DB", 'c')
+    db = dbm.open(dbName+'/'+dbName+'DB', 'c')
     
     for dictFile in files:
         inFile = open(dictFile,'rb')
