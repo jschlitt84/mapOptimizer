@@ -26,7 +26,7 @@ if dbType == 'mongo':
         del reindexed
         print "Operation complete....\n"
         
-elif dbType == 'dbm'
+elif dbType == 'dbm':
     import dbm
     db = dbm.open(dbName, 'c')
     
