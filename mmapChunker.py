@@ -30,7 +30,6 @@ for i, line in enumerate(inFile):
         keyCts[refIt(line)] = 1
         
 print keyCts
-quit()
 
 blockSize = numLines/numBlocks
 refList = dict(); index = 0; x = 0
@@ -52,7 +51,6 @@ outFile = open(expName+'Refs.pickle','w')
 cPickle.dump(refList,outFile)
 quit()
 
-mmapKeys = []
 mmaps = dict()
 
 #for key in mmapKeys:
