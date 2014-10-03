@@ -135,7 +135,7 @@ for i in range(numPts-1):
 	p1 = pts[i]	
 	for j in range(i,numPts):
 		p2 = pts[j]
-		if pts[j] in towns:
+		if p2 in towns:
 			pairs.add(str(rank(p1[0],p1[1],p2[0],p2[1])))
 			iter += 1
 			if iter%500000 == 0:
