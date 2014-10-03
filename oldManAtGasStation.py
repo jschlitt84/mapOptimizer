@@ -66,7 +66,7 @@ def findDist(network,pts,core,out_q):
     for p in pts:
     	subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
     	if True:
-	     length = nx.shortest_path_length(subnNet,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
+	     length = nx.shortest_path_length(subNet,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
 	else:
 	#except Exception: 
 	     length = -1
