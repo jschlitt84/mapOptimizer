@@ -70,7 +70,7 @@ def findDist(network,pts,core,out_q):
 	#else:
 	except Exception: 
 	     length = -1
-	distances.add(str(rank(p[0],p[1],p[2],p[3]))+' '+str(int(length)) 
+	distances.add(str(rank(p[0],p[1],p[2],p[3]))+' '+str(int(length))) 
 	#distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
 	count += 1
 	if count%500 == 0:
