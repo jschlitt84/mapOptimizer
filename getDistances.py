@@ -129,9 +129,10 @@ if not os.path.exists(name):
 for i in range(cores):
 	listOut = open('%s/netSlice%s.txt' % (name,i),"w")
 	listOut.close()
-	
-for i in towns:
-	for j in pts:
+
+
+for i in range(pts-1):
+	for j in range(i,pts):
 		pairs.add(str(rank(i[0],i[1],j[0],j[1])))
 		iter += 1
 		if iter%500000 == 0:
@@ -144,6 +145,22 @@ for i in towns:
 			writeTo += 1
 			if writeTo == cores:
 				writeTo = 0
+		
+
+"""for i in towns:
+	for j in pts:
+		pairs.add(str(rank(i[0],i[1],j[0],j[1])))
+		iter += 1
+		if iter%500000 == 0:
+			print iter,writeTo
+			listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
+			for line in pairs:
+				listOut.write(line+'\n')
+			listOut.close()
+			pairs = set()
+			writeTo += 1
+			if writeTo == cores:
+				writeTo = 0"""
 
 
 listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
