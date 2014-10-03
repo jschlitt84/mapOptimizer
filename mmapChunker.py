@@ -22,6 +22,15 @@ inFile = open(fileIn)
 numLines = sum(1 for line in inFile)
 inFile.close()
 
+keyCts = dict()
+inFile = open(fileIn)
+for i, line in enumerate(inFile):
+    read = refIt(line)
+    try:
+        keyCts[refIt(line)] += 1
+    except:
+        keyCts[refIt(line)] = 1
+quit()
 
 indexPts = []
 
@@ -49,7 +58,7 @@ refs = dict(refs.items() + {item:read for item in found}.items())
 print indexPts
 print refs
 
-outFile = open(expName+'refList.pickle','w')
+outFile = open(expName+'RefList.pickle','w')
 cPickle.dump(refs,outFile)
 quit()
 
