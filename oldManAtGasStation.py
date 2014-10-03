@@ -10,6 +10,8 @@ from time import sleep
 trimRadius = 17
 trimWidth = 17
 
+def listFromStr(text):
+    return [int(entry) for entry in list(key.replace('[','').replace(']','').replace('(','').replace(')','').split(','))]
 
 def dist(pt1,pt2,pt3): # x3,y3 is the point
     px = pt2[0]-pt1[0]; py = pt2[1]-pt1[1]
@@ -41,7 +43,7 @@ def trimNet(network,pt1,pt2,trimRadius):
     xMin = min(pt1[0],pt2[0])-trimRadius
     yMax = max(pt1[1],pt2[1])+trimRadius
     yMin = min(pt1[1],pt2[1])-trimRadius
-    nodeList = [node for node in network.nodes() if inRange(eval(node),pt1,pt2,xMax,xMin,yMax,yMin)]
+    nodeList = [node for node in network.nodes() if inRange(listFromStr(node),pt1,pt2,xMax,xMin,yMax,yMin)]
     return network.subgraph(nodeList)
 
 def rank(x1,y1,x2,y2):
@@ -59,7 +61,7 @@ def findDist(network,pts,core,out_q):
     distances = dict(); count = 0
     toDo = len(pts)
     print "Process %s starting run with %s entries" % (core,len(pts))
-    pts = [list(eval(pt.replace('\n',''))) for pt in pts]
+    pts = [listFromStr(pt.replace('\n','')) for pt in pts]
     for p in pts:
     	subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
     	#if True:
