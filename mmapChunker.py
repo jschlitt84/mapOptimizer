@@ -15,7 +15,7 @@ fileIn = sys.argv[1]
 numBlocks = int(sys.argv[2])
 pickleName = sys.argv[3]
 pickleCells = int(sys.argv[4])
-expName = file.split('/')[0]
+expName = fileIn.split('/')[0]
 
 print "Counting lines for file", fileIn
 numLines = sum(1 for line in open(fileIn))
