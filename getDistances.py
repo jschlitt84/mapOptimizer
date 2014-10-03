@@ -115,7 +115,7 @@ numPts = len(pts)
 numTowns = len(towns)
 
 print numPts,"available spaces found"
-print "Preparing to fill expected values set of approximate size",numPts*(numPts-1)*0.5
+print "Preparing to fill expected values set of approximate size",(numPts*(numPts-1))/2
 
 sleep(1)
 writeTo = 0
@@ -136,7 +136,7 @@ for i in range(numPts-1):
 	for j in range(i,numPts):
 		p2 = pts[j]
 		if pts[j] in towns:
-			pairs.add(str(rank(p1[0],p1[1],j1[0],j1[1])))
+			pairs.add(str(rank(p1[0],p1[1],p2[0],p2[1])))
 			iter += 1
 			if iter%500000 == 0:
 				print iter,writeTo
