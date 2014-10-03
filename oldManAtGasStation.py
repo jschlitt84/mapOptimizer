@@ -61,7 +61,7 @@ def findDist(network,pts,core,out_q):
     distances = set(); count = 0
     toDo = len(pts)
     print "Process %s starting run with %s entries" % (core,len(pts))
-    pts = set([listFromStr(pt.replace('\n','')) for pt in pts])
+    pts = [listFromStr(pt.replace('\n','')) for pt in pts]
     for p in pts:
     	#subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
     	#if True:
