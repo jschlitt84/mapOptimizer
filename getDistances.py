@@ -130,12 +130,13 @@ for i in range(cores):
 	listOut = open('%s/netSlice%s.txt' % (name,i),"w")
 	listOut.close()
 
+index = [str(town) for town in towns]
 
 for i in range(numPts-1):
 	p1 = pts[i]	
 	for j in range(i,numPts):
 		p2 = pts[j]
-		if p2 in towns:
+		if str(p2) in index:
 			pairs.add(str(rank(p1[0],p1[1],p2[0],p2[1])))
 			iter += 1
 			if iter%500000 == 0:
