@@ -58,7 +58,8 @@ def rank(x1,y1,x2,y2):
 
 def findDist(network,pts,core,out_q):
     t1 = datetime.datetime.now()
-    distances = set(); count = 0
+    #distances = set(); count = 0
+    distances = dict(); count = 0
     toDo = len(pts)
     print "Process %s starting run with %s entries" % (core,len(pts))
     pts = [listFromStr(pt.replace('\n','')) for pt in pts]
