@@ -26,11 +26,13 @@ def findDist(network,pts,core,out_q):
     for p in pts:
     	try:
 	     length = nx.shortest_path_length(network,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
-	except:
+	except Exception,e: 
+	     if count%500 == 0
+	         print str(e)
 	     length = -1
-	distances[str(rank(p[0],p[1],p[2],p[3]))] = length
+	distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
 	count += 1
-	if count%250 == 0:
+	if count%500 == 0:
 		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
     out_q.put(distances) 
