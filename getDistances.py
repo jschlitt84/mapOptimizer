@@ -131,10 +131,12 @@ for i in range(cores):
 	listOut.close()
 
 
-for i in range(pts-1):
-	for j in range(i,pts):
+for i in range(numPts-1):
+	p1 = pts[i]	
+	for j in range(i,numPts):
+		p2 = pts[j]
 		if pts[j] in towns:
-			pairs.add(str(rank(i[0],i[1],j[0],j[1])))
+			pairs.add(str(rank(p1[0],p1[1],j1[0],j1[1])))
 			iter += 1
 			if iter%500000 == 0:
 				print iter,writeTo
