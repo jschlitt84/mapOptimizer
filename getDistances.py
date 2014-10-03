@@ -115,7 +115,7 @@ numPts = len(pts)
 numTowns = len(towns)
 
 print numPts,"available spaces found"
-print "Preparing to fill expected values set of approximate size",(numPts-1)*numTowns
+print "Preparing to fill expected values set of approximate size",numPts*(numPts-1)*0.5
 
 sleep(1)
 writeTo = 0
@@ -133,18 +133,19 @@ for i in range(cores):
 
 for i in range(pts-1):
 	for j in range(i,pts):
-		pairs.add(str(rank(i[0],i[1],j[0],j[1])))
-		iter += 1
-		if iter%500000 == 0:
-			print iter,writeTo
-			listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
-			for line in pairs:
-				listOut.write(line+'\n')
-			listOut.close()
-			pairs = set()
-			writeTo += 1
-			if writeTo == cores:
-				writeTo = 0
+		if pts[j] in towns:
+			pairs.add(str(rank(i[0],i[1],j[0],j[1])))
+			iter += 1
+			if iter%500000 == 0:
+				print iter,writeTo
+				listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
+				for line in pairs:
+					listOut.write(line+'\n')
+				listOut.close()
+				pairs = set()
+				writeTo += 1
+				if writeTo == cores:
+					writeTo = 0
 		
 
 """for i in towns:
