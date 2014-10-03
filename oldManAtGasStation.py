@@ -64,11 +64,9 @@ def findDist(network,pts,core,out_q):
     print "Process %s starting run with %s entries" % (core,len(pts))
     pts = [listFromStr(pt.replace('\n','')) for pt in pts]
     for p in pts:
-    	#subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
-    	#if True:
+    	subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
     	try:
-	     length = nx.shortest_path_length(network,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
-	#else:
+	     length = nx.shortest_path_length(subnet,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
 	except Exception: 
 	     length = -1
 	#distances.add(str(rank(p[0],p[1],p[2],p[3]))+' '+str(int(length))) 
@@ -78,7 +76,7 @@ def findDist(network,pts,core,out_q):
 		print (datetime.datetime.now()-t1)
 		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
-    #out_q.put(distances) 
+    out_q.put(distances) 
     
 
 def getNet(listed,network,penalty):
