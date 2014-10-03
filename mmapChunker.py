@@ -22,6 +22,7 @@ inFile = open(fileIn)
 numLines = sum(1 for line in inFile)
 inFile.close()
 
+print "Counting occurances per key"
 keyCts = dict()
 inFile = open(fileIn)
 for i, line in enumerate(inFile):
@@ -30,6 +31,8 @@ for i, line in enumerate(inFile):
         keyCts[refIt(line)] += 1
     except:
         keyCts[refIt(line)] = 1
+        
+print keyCts
 quit()
 
 indexPts = []
