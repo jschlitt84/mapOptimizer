@@ -51,7 +51,7 @@ mmaps = dict()
 for key in mmapKeys:
     mmaps[key] = open(expName++key+'.map', 'r+')
     
-pickleFiles = files = ['%s/DistDict%s.pickle' % (exName,i) for i in range(pickleCells)]
+pickleFiles = files = ['%s/DistDict%s.pickle' % (expName,i) for i in range(pickleCells)]
 
 for dictFile in pickleFiles:
     inFile = open(dictFile,'rb')
@@ -60,6 +60,7 @@ for dictFile in pickleFiles:
     for key, item in loaded.iteritems():
         mmaps[refs(refIt(key))].write(writeIt(key,item))
         
-print "It finished, surprisingly"
+for key in mmapKeys:
+    mmaps[key].close()
         
-    
+print "It finished, surprisingly"
