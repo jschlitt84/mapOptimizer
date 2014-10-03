@@ -17,25 +17,30 @@ pickleName = sys.argv[3]
 pickleCells = int(sys.argv[4])
 expName = file.split('/')[0]
 
+print "Counting lines for file", fileIn
 numLines = sum(1 for line in open(fileIn))
+
 
 indexPts = []
 
 blockSize = numLines/numBlocks
 refs = dict(); found = set()
 
+print numLines, "found, using", numBlocks, "of size", blockSize
  
+count = 0 
 inFile = open(fileIn)
 for i, line in enumerate(fileIn):
     read = refIt(line)
     found.add(read)
     if i%blockSize == 0:
+        print "Completed block", count
         found.remove(read)
         indexPts.append(read)
-        if i != 0:
+        if count != 0:
             refs = dict(refs.items() + {item:read for item in found}.items())
             found = set()         
-    i += 1
+    count += 1
     
 refs = dict(refs.items() + {item:read for item in found}.items()) 
 
