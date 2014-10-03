@@ -27,7 +27,7 @@ def findDist(network,pts,core,out_q):
     	try:
 	     length = nx.shortest_path_length(network,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
 	except Exception,e: 
-	     if count%500 == 0
+	     if count%500 == 0:
 	         print str(e)
 	     length = -1
 	distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
