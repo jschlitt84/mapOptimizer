@@ -11,13 +11,15 @@ trimRadius = 10
 
 def inRange(pt,xMax,xMin,yMax,yMin):
     return pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin 
+    
 
 def trimNet(network,pt1,pt2,trimRadius):
     xMax = max(pt1[0],pt2[0])+trimRadius
     xMin = min(pt1[0],pt2[0])-trimRadius
     yMax = max(pt1[1],pt2[1])+trimRadius
     yMin = min(pt1[1],pt2[1])-trimRadius
-    nodeList = [node for node in network.nodes() if inRange(node,xMax,xMin,yMax,yMin)]
+    isGood = lambda x: inRange(eval(x),xMax,xMin,yMax,yMin)
+    nodeList = [node for node in network.nodes() if isGood(node)]
     return network.subgraph(nodeList)
 
 def rank(x1,y1,x2,y2):
