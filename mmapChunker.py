@@ -36,8 +36,8 @@ for i, line in enumerate(inFile):
     read = refIt(line)
     found.add(read)
     if i%blockSize == 0:
-        print "Completed block", count
-        found.remove(read)
+        print "Completed block", count,refs.keys()
+        #found.remove(read)
         indexPts.append(read)
         if count != 0:
             refs = dict(refs.items() + {item:read for item in found}.items())
@@ -48,6 +48,10 @@ refs = dict(refs.items() + {item:read for item in found}.items())
 
 print indexPts
 print refs
+
+outFile = open(expName+'refList.pickle','w')
+cPickle.dump(refs,outFile)
+quit()
 
 mmapKeys = []
 mmaps = dict()
