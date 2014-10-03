@@ -37,11 +37,11 @@ def findDist(network,pts,core,out_q):
     print "Process %s starting run with %s entries" % (core,len(pts))
     pts = [list(eval(pt.replace('\n',''))) for pt in pts]
     for p in pts:
-    	subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]])
+    	subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
     	try:
 	     length = nx.shortest_path_length(subNet,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
 	except Exception,e: 
-	     if count%500 == 0:
+	     if count%50 == 0:
 	         print str(e)
 	     length = -1
 	distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
