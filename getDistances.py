@@ -139,7 +139,7 @@ for i in range(numPts-1):
 		if str(p2) in index:
 			pairs.add(str(rank(p1[0],p1[1],p2[0],p2[1])))
 			iter += 1
-			if iter%500000 == 0:
+			if iter%250000 == 0:
 				print iter,writeTo
 				listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
 				for line in pairs:
