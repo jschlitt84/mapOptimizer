@@ -7,8 +7,8 @@ from multiprocessing import Process, Queue, cpu_count
 from math import ceil, sqrt
 from time import sleep
 
-trimRadius = 17
-trimWidth = 17
+trimRadius = 15
+trimWidth = 15
 
 def listFromStr(text):
     return [int(entry) for entry in list(text.replace('[','').replace(']','').replace('(','').replace(')','').split(','))]
