@@ -11,7 +11,7 @@ trimRadius = 17
 trimWidth = 17
 
 def listFromStr(text):
-    return [int(entry) for entry in list(key.replace('[','').replace(']','').replace('(','').replace(')','').split(','))]
+    return [int(entry) for entry in list(text.replace('[','').replace(']','').replace('(','').replace(')','').split(','))]
 
 def dist(pt1,pt2,pt3): # x3,y3 is the point
     px = pt2[0]-pt1[0]; py = pt2[1]-pt1[1]
