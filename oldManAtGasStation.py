@@ -37,8 +37,6 @@ def trimNet(network,pt1,pt2,trimRadius):
     xMin = min(pt1[0],pt2[0])-trimRadius
     yMax = max(pt1[1],pt2[1])+trimRadius
     yMin = min(pt1[1],pt2[1])-trimRadius
-    if pt1[0] < pt2[0]
-    slope = getSlope(pt1,pt2)
     isGood = lambda x: inRange(eval(x),pt1,pt2,xMax,xMin,yMax,yMin,slope)
     nodeList = [node for node in network.nodes() if isGood(node)]
     return network.subgraph(nodeList)
