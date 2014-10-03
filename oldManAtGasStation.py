@@ -25,9 +25,8 @@ def dist(pt1,pt2,pt3): # x3,y3 is the point
 
 
 def inRange(pt,pt1,pt2,xMax,xMin,yMax,yMin):
-    trimWidth = 20
     if pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin:
-        if dist(pt1,pt2,pt) < trimAll:
+        if dist(pt1,pt2,pt) < trimWidth:
             return True
     return False
         
@@ -37,7 +36,7 @@ def trimNet(network,pt1,pt2,trimRadius):
     xMin = min(pt1[0],pt2[0])-trimRadius
     yMax = max(pt1[1],pt2[1])+trimRadius
     yMin = min(pt1[1],pt2[1])-trimRadius
-    isGood = lambda x: inRange(eval(x),pt1,pt2,xMax,xMin,yMax,yMin,slope)
+    isGood = lambda x: inRange(eval(x),pt1,pt2,xMax,xMin,yMax,yMin)
     nodeList = [node for node in network.nodes() if isGood(node)]
     return network.subgraph(nodeList)
 
