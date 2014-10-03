@@ -7,6 +7,19 @@ from multiprocessing import Process, Queue, cpu_count
 from math import ceil
 from time import sleep
 
+trimRadius = 10
+
+def inRange(pt,xMax,xMin,yMax,yMin):
+    return pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin 
+
+def trimNet(network,pt1,pt2,trimRadius):
+    xMax = max(pt1[0],pt2[0])+trimRadius
+    xMin = min(pt1[0],pt2[0])-trimRadius
+    yMax = max(pt1[1],pt2[1])+trimRadius
+    yMin = min(pt1[1],pt2[1])-trimRadius
+    nodeList = [node for node in network.nodes() if inRange(node)]
+    return network.subgraph(nodeList)
+
 def rank(x1,y1,x2,y2):
     if x1 < x2:
         return x1,y1,x2,y2
@@ -23,9 +36,10 @@ def findDist(network,pts,core,out_q):
     toDo = len(pts)
     print "Process %s starting run with %s entries" % (core,len(pts))
     pts = [list(eval(pt.replace('\n',''))) for pt in pts]
+    subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]])
     for p in pts:
     	try:
-	     length = nx.shortest_path_length(network,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
+	     length = nx.shortest_path_length(subNet,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
 	except Exception,e: 
 	     if count%500 == 0:
 	         print str(e)
