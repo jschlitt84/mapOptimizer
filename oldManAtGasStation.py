@@ -70,13 +70,13 @@ def findDist(network,pts,core,out_q):
 	#else:
 	except Exception: 
 	     length = -1
-	distances.add(str(rank(p[0],p[1],p[2],p[3]))+' '+str(int(length))) 
-	#distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
+	#distances.add(str(rank(p[0],p[1],p[2],p[3]))+' '+str(int(length))) 
+	distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
 	count += 1
 	if count%500 == 0:
 		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
-    out_q.put({core:distances}) 
+    #out_q.put(distances) 
     
 
 def getNet(listed,network,penalty):
@@ -100,8 +100,8 @@ def getNet(listed,network,penalty):
             merged.update(out_q.get())
         for p in processes:
             p.join()
-        for core in range(cores):
-        	master = master.union(merged[core])
+        #for core in range(cores):
+        #	master = master.union(merged[core])
 	return merged
 
 fileIn = open(sys.argv[1])
