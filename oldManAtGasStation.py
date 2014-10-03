@@ -73,7 +73,8 @@ def findDist(network,pts,core,out_q):
 	#distances.add(str(rank(p[0],p[1],p[2],p[3]))+' '+str(int(length))) 
 	distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
 	count += 1
-	if count%500 == 0:
+	if count%250 == 0:
+		print (datetime.datetime.now()-t1)
 		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
     #out_q.put(distances) 
