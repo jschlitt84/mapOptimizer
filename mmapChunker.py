@@ -17,15 +17,12 @@ pickleName = sys.argv[3]
 pickleCells = int(sys.argv[4])
 expName = fileIn.split('/')[0]
 
-print "Counting lines for file", fileIn
-inFile = open(fileIn)
-numLines = sum(1 for line in inFile)
-inFile.close()
-
+numLines = 0
 print "Counting occurances per key"
 keyCts = dict()
 inFile = open(fileIn)
 for i, line in enumerate(inFile):
+    numLines += 1
     read = refIt(line)
     try:
         keyCts[refIt(line)] += 1
@@ -35,34 +32,24 @@ for i, line in enumerate(inFile):
 print keyCts
 quit()
 
-indexPts = []
-
 blockSize = numLines/numBlocks
+refList = dict(); index = 0; x = 0
+
+for key, value in keyCts.iteritems():
+    x += value
+    refList[key] = index
+    if x > blockSize:
+        x = 0
+        index += 1
+    
+
 refs = dict(); found = set()
 
 print numLines, "found, using", numBlocks, "of size", blockSize
- 
-count = 0 
-inFile = open(fileIn)
-for i, line in enumerate(inFile):
-    read = refIt(line)
-    found.add(read)
-    if i%blockSize == 0:
-        print "Completed block", count,refs.keys()
-        #found.remove(read)
-        indexPts.append(read)
-        if count != 0:
-            refs = dict(refs.items() + {item:read for item in found}.items())
-            found = set()         
-    count += 1
-    
-refs = dict(refs.items() + {item:read for item in found}.items()) 
+print refList
 
-print indexPts
-print refs
-
-outFile = open(expName+'RefList.pickle','w')
-cPickle.dump(refs,outFile)
+outFile = open(expName+'Refs.pickle','w')
+cPickle.dump(refList,outFile)
 quit()
 
 mmapKeys = []
@@ -71,7 +58,7 @@ mmaps = dict()
 #for key in mmapKeys:
 #    mmaps[key] = open(expName+key+'.map', 'w')
 
-for key in mmapKeys:
+for key in range(index):
     mmaps[key] = open(expName++key+'.map', 'r+')
     
 pickleFiles = files = ['%s/DistDict%s.pickle' % (expName,i) for i in range(pickleCells)]
