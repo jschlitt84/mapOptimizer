@@ -132,7 +132,7 @@ for i in range(cores):
 
 index = set([str(town) for town in towns])
 
-"""for i in range(numPts-1):
+for i in range(numPts-1):
 	p1 = pts[i]	
 	for j in range(i,numPts):
 		p2 = pts[j]
@@ -151,21 +151,6 @@ index = set([str(town) for town in towns])
 					writeTo = 0
 		
 
-""""""for i in towns:
-	for j in pts:
-		pairs.add(str(rank(i[0],i[1],j[0],j[1])))
-		iter += 1
-		if iter%500000 == 0:
-			print iter,writeTo
-			listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
-			for line in pairs:
-				listOut.write(line+'\n')
-			listOut.close()
-			pairs = set()
-			writeTo += 1
-			if writeTo == cores:
-				writeTo = 0""""""
-
 
 listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
 for line in pairs:
@@ -176,14 +161,14 @@ listOut.close()
 print "Preparing to generate qsubs"
 
 #block = int(ceil(numPairs)/float(cores))
-"""
+
 workingDir = os.getcwd() + '/' 
-"""for i in range(cores):
+for i in range(cores):
 	#chunk = pairs[block*i:block*(i+1)]
 	#listOut = open('%s/netSlice%s.txt' % (name,i),"w")
 	#listOut.write('\n'.join(chunk))
 	#listOut.close()
-	makeQsubs(name,i,qsubLoaded,workingDir+netName+' '+str(penalty))"""
+	makeQsubs(name,i,qsubLoaded,workingDir+netName+' '+str(penalty))
 
 print "Waiting for available slots"
 
