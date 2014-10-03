@@ -58,26 +58,25 @@ def rank(x1,y1,x2,y2):
 
 def findDist(network,pts,core,out_q):
     t1 = datetime.datetime.now()
-    distances = dict(); count = 0
+    distances = set(); count = 0
     toDo = len(pts)
     print "Process %s starting run with %s entries" % (core,len(pts))
-    pts = [listFromStr(pt.replace('\n','')) for pt in pts]
+    pts = set([listFromStr(pt.replace('\n','')) for pt in pts]
     for p in pts:
-    	subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
+    	#subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
     	#if True:
     	try:
-	     length = nx.shortest_path_length(subNet,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
+	     length = nx.shortest_path_length(network,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
 	#else:
-	except Exception,e: 
-	     if count%50 == 0:
-	         print str(e)
+	except Exception: 
 	     length = -1
-	distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
+	distances.add(str(rank(p[0],p[1],p[2],p[3])))+' '+str(int(length)) 
+	#distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
 	count += 1
 	if count%500 == 0:
 		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
-    out_q.put(distances) 
+    out_q.put({core:distances}) 
     
 
 def getNet(listed,network,penalty):
@@ -88,6 +87,7 @@ def getNet(listed,network,penalty):
         
         block = int(ceil(len(listed)/float(cores)))
         processes = []
+        master = set()
 	
 	print "Starting execution with %s threads and %s entries" % (cores,entries)
         for i in range(cores):
@@ -100,9 +100,8 @@ def getNet(listed,network,penalty):
             merged.update(out_q.get())
         for p in processes:
             p.join()
-        for key,item in merged.iteritems():
-        	if item == -1:
-        		merged[key] = penalty
+        for core in range(cores):
+        	master = master.union(merged[core])
 	return merged
 
 fileIn = open(sys.argv[1])
