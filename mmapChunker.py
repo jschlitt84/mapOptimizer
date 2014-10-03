@@ -18,7 +18,9 @@ pickleCells = int(sys.argv[4])
 expName = fileIn.split('/')[0]
 
 print "Counting lines for file", fileIn
-numLines = sum(1 for line in open(fileIn))
+inFile = open(fileIn)
+numLines = sum(1 for line in inFile)
+inFile.close()
 
 
 indexPts = []
@@ -30,7 +32,7 @@ print numLines, "found, using", numBlocks, "of size", blockSize
  
 count = 0 
 inFile = open(fileIn)
-for i, line in enumerate(fileIn):
+for i, line in enumerate(inFile):
     read = refIt(line)
     found.add(read)
     if i%blockSize == 0:
