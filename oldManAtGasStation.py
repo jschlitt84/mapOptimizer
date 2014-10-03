@@ -4,21 +4,42 @@ import datetime
 import sys, os
 
 from multiprocessing import Process, Queue, cpu_count
-from math import ceil
+from math import ceil, sqrt
 from time import sleep
 
 trimRadius = 10
+trimWidth = 20
 
-def inRange(pt,xMax,xMin,yMax,yMin):
-    return pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin 
-    
+
+def dist(pt1,pt2,pt3): # x3,y3 is the point
+    px = pt2[0]-pt1[0]; py = pt2[1]-pt1[1]
+    i = px*px + py*py
+    u =  ((pt3[0] - pt1[0]) * px + (pt3[1] - pt1[1]) * py) / float(i)
+    if u > 1:
+        u = 1
+    elif u < 0:
+        u = 0
+    x = pt1[0] + u * px; y = pt1[1] + u * py
+    dx = x - pt3[0]; dy = y - pt3[1]
+    return sqrt(dx*dx + dy*dy)
+
+
+def inRange(pt,pt1,pt2,xMax,xMin,yMax,yMin):
+    trimWidth = 20
+    if pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin:
+        if dist(pt1,pt2,pt) < trimAll:
+            return True
+    return False
+        
 
 def trimNet(network,pt1,pt2,trimRadius):
     xMax = max(pt1[0],pt2[0])+trimRadius
     xMin = min(pt1[0],pt2[0])-trimRadius
     yMax = max(pt1[1],pt2[1])+trimRadius
     yMin = min(pt1[1],pt2[1])-trimRadius
-    isGood = lambda x: inRange(eval(x),xMax,xMin,yMax,yMin)
+    if pt1[0] < pt2[0]
+    slope = getSlope(pt1,pt2)
+    isGood = lambda x: inRange(eval(x),pt1,pt2,xMax,xMin,yMax,yMin,slope)
     nodeList = [node for node in network.nodes() if isGood(node)]
     return network.subgraph(nodeList)
 
