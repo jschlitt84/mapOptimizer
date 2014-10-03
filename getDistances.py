@@ -132,7 +132,7 @@ for i in range(cores):
 
 index = set([str(town) for town in towns])
 
-for i in range(numPts-1):
+"""for i in range(numPts-1):
 	p1 = pts[i]	
 	for j in range(i,numPts):
 		p2 = pts[j]
@@ -151,7 +151,7 @@ for i in range(numPts-1):
 					writeTo = 0
 		
 
-"""for i in towns:
+""""""for i in towns:
 	for j in pts:
 		pairs.add(str(rank(i[0],i[1],j[0],j[1])))
 		iter += 1
@@ -164,7 +164,7 @@ for i in range(numPts-1):
 			pairs = set()
 			writeTo += 1
 			if writeTo == cores:
-				writeTo = 0"""
+				writeTo = 0""""""
 
 
 listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
@@ -183,7 +183,7 @@ for i in range(cores):
 	#listOut = open('%s/netSlice%s.txt' % (name,i),"w")
 	#listOut.write('\n'.join(chunk))
 	#listOut.close()
-	makeQsubs(name,i,qsubLoaded,workingDir+netName+' '+str(penalty))
+	makeQsubs(name,i,qsubLoaded,workingDir+netName+' '+str(penalty))"""
 
 print "Waiting for available slots"
 
