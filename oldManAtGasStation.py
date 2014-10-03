@@ -27,15 +27,15 @@ def dist(pt1,pt2,pt3): # x3,y3 is the point
 
 
 def inRange(pt,pt1,pt2,xMax,xMin,yMax,yMin):
-    return pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin
+    #return pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin
 
-    """if pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin:
+    if pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin:
         try:
         	if dist(pt1,pt2,pt) < trimWidth:
         	    return True
         except:
         	return True
-    return False"""
+    return False
         
 
 def trimNet(network,pt1,pt2,trimRadius):
