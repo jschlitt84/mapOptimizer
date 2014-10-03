@@ -12,9 +12,9 @@ def writeIt(key,item):
 
 
 fileIn = sys.argv[1]
-numBlocks = sys.argv[2]
+numBlocks = int(sys.argv[2])
 pickleName = sys.argv[3]
-pickleCells = sys.argv[4]
+pickleCells = int(sys.argv[4])
 expName = file.split('/')[0]
 
 numLines = sum(1 for line in open(fileIn))
@@ -24,7 +24,7 @@ indexPts = []
 blockSize = numLines/numBlocks
 refs = dict(); found = set()
 
-
+ 
 inFile = open(fileIn)
 for i, line in enumerate(fileIn):
     read = refIt(line)
@@ -60,7 +60,6 @@ for dictFile in pickleFiles:
     for key, item in loaded.iteritems():
         mmaps[refs(refIt(key))].write(writeIt(key,item))
         
-for key in mmapKeys:
-    mmaps[key].close()
-        
 print "It finished, surprisingly"
+        
+    
