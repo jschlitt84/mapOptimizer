@@ -176,9 +176,9 @@ listOut.close()
 print "Preparing to generate qsubs"
 
 #block = int(ceil(numPairs)/float(cores))
-
+"""
 workingDir = os.getcwd() + '/' 
-for i in range(cores):
+"""for i in range(cores):
 	#chunk = pairs[block*i:block*(i+1)]
 	#listOut = open('%s/netSlice%s.txt' % (name,i),"w")
 	#listOut.write('\n'.join(chunk))
