@@ -130,7 +130,7 @@ for i in range(cores):
 	listOut = open('%s/netSlice%s.txt' % (name,i),"w")
 	listOut.close()
 
-index = [str(town) for town in towns]
+index = set([str(town) for town in towns])
 
 for i in range(numPts-1):
 	p1 = pts[i]	
