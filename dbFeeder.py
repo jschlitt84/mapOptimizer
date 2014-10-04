@@ -61,12 +61,15 @@ elif dbType == 'mmap':
             count = 0
             for key,item in loaded.iteritems():
                 count += 1
-                if count%1000:
+                if count%500 == 0:
                     print count
                     mapf.flush()
                 if key not in found:
-                    mapf.write(writeIt(key,item))
-                    found.add(key)
+                    try:
+                        mapf.write(writeIt(key,item))
+                        found.add(key)
+                    except:
+                        print count
             print "File mmapping complete\n"
     
 
