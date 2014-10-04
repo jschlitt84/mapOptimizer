@@ -54,7 +54,7 @@ def findDist(network,pts,core,out_q):
     for p in pts:
     	newDistances = nx.single_source_dijkstra_path_length(network,p)
     	for key, item in newDistances.iteritems():
-    		distances[getKey(p,key)] = newDistances[key]
+    	    distances[getKey(p,key)] = newDistances[key]
     	    count += 1
 	    if count%200 == 0:
 			print (datetime.datetime.now()-t1)
