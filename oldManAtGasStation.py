@@ -26,25 +26,6 @@ def dist(pt1,pt2,pt3): # x3,y3 is the point
     return sqrt(dx*dx + dy*dy)
 
 
-def inRange(pt,pt1,pt2,xMax,xMin,yMax,yMin):
-    #return pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin
-    if pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin:
-        try:
-        	if dist(pt1,pt2,pt) < trimWidth:
-        	    return True
-        except:
-        	return True
-    return False
-        
-
-def trimNet(network,pt1,pt2,trimRadius):
-    xMax = max(pt1[0],pt2[0])+trimRadius
-    xMin = min(pt1[0],pt2[0])-trimRadius
-    yMax = max(pt1[1],pt2[1])+trimRadius
-    yMin = min(pt1[1],pt2[1])-trimRadius
-    nodeList = [node for node in network.nodes() if inRange(listFromStr(node),pt1,pt2,xMax,xMin,yMax,yMin)]
-    return network.subgraph(nodeList)
-
 def rank(x1,y1,x2,y2):
     if x1 < x2:
         return x1,y1,x2,y2
@@ -62,6 +43,9 @@ def getKey(key1,key2):
 	
 	
 def findDist(network,pts,core,out_q):
+    #solitary=[ n for n,d in network.degree_iter(with_labels=True) if d==0 ]
+    #network.delete_nodes_from(solitary)
+    
     t1 = datetime.datetime.now()
     distances = dict(); count = 0
     toDo = len(pts)
@@ -70,8 +54,11 @@ def findDist(network,pts,core,out_q):
     for p in pts:
     	newDistances = nx.single_source_dijkstra_path_length(network,p)
     	for key, item in newDistances.iteritems():
+    		print p, type(p)
+    		print key, type(key)
+    		print newDistances[p][key], type(newDistances[p][key])
     		distances[getKey(p,key)] = newDistances[p][key]
-    if count%500 == 0:
+    if count%50 == 0:
 		print (datetime.datetime.now()-t1)
 		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
@@ -143,5 +130,26 @@ pickleOut = open('/'.join(sys.argv[1].split('/')[0:-1])+'/DistDict%s.pickle' % s
 cPickle.dump(distDict, pickleOut)
 pickleOut.close()
 sleep(3)
+
+
+
+"""def inRange(pt,pt1,pt2,xMax,xMin,yMax,yMin):
+    #return pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin
+    if pt[0]<=xMax and pt[0]>= xMin and pt[1]<=yMax and pt[1]>=yMin:
+        try:
+        	if dist(pt1,pt2,pt) < trimWidth:
+        	    return True
+        except:
+        	return True
+    return False
+        
+
+def trimNet(network,pt1,pt2,trimRadius):
+    xMax = max(pt1[0],pt2[0])+trimRadius
+    xMin = min(pt1[0],pt2[0])-trimRadius
+    yMax = max(pt1[1],pt2[1])+trimRadius
+    yMin = min(pt1[1],pt2[1])-trimRadius
+    nodeList = [node for node in network.nodes() if inRange(listFromStr(node),pt1,pt2,xMax,xMin,yMax,yMin)]
+    return network.subgraph(nodeList)"""
 
 
