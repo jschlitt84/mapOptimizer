@@ -54,11 +54,30 @@ def rank(x1,y1,x2,y2):
         return x1,y1,x2,y2
     else:
         return x2,y2,x1,y1
-
+        
+def getKey(key1,key2):
+	pt1 = listFromStr(key1)
+	pt2 = listFromStr(key2)
+	return str(rank(pt1[0],pt1[1],pt2[0],pt2[1]))
+	
+	
 def findDist(network,pts,core,out_q):
     t1 = datetime.datetime.now()
-    #distances = set(); count = 0
     distances = dict(); count = 0
+    toDo = len(pts)
+    print "Process %s starting run with %s entries" % (core,len(pts))
+    for p in pts:
+    	newDistances = nx.single_source_dijkstra_path_length(network,p)
+    	for key, item in newDistances.iteritems():
+    		distances[getKey(p,key)] = newDistances[p][key]
+    if count%500 == 0:
+		print (datetime.datetime.now()-t1)
+		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
+    print "Process %s Distance tabulation complete!" % core
+    out_q.put(distances) 
+    		
+    #Old, slow, & expensive		
+    """distances = dict(); count = 0
     toDo = len(pts)
     print "Process %s starting run with %s entries" % (core,len(pts))
     pts = [listFromStr(pt.replace('\n','')) for pt in pts]
@@ -76,7 +95,7 @@ def findDist(network,pts,core,out_q):
 		print (datetime.datetime.now()-t1)
 		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
-    out_q.put(distances) 
+    out_q.put(distances) """
     
 
 def getNet(listed,network,penalty):
@@ -100,8 +119,6 @@ def getNet(listed,network,penalty):
             merged.update(out_q.get())
         for p in processes:
             p.join()
-        #for core in range(cores):
-        #	master = master.union(merged[core])
 	return merged
 
 fileIn = open(sys.argv[1])
