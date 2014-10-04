@@ -52,7 +52,7 @@ elif dbType == 'mmap':
     temp.write("deboo2014")
     temp.close()
     with open(dbName+'.mmap', "r+b") as f:
-        mapf = mmap.mmap(f.fileno())
+        mapf = mmap.mmap(f.fileno(),0)
         for dictFile in files:
             inFile = open(dictFile,'rb')
             print "Preparing to load file", dictFile, "from pickle"
