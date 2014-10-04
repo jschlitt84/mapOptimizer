@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en"><Esri><CreaDate>20140929</CreaDate><CreaTime>19582700</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process ToolSource="c:\program files (x86)\arcgis\desktop10.1\ArcToolbox\Toolboxes\Conversion Tools.tbx\RasterToASCII" Date="20140929" Time="195827">RasterToASCII hospitals_Resample Z:\Ascii\hospitals.txt</Process></lineage></DataProperties></Esri></metadata>

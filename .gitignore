@@ -1,1 +1,6 @@
-*.txt
+*.pickle
+dbFeed/*.pickle
+*.tar
+*/*.tar
+
+*.pickle
