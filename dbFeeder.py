@@ -47,6 +47,8 @@ elif dbType == 'mmap':
         
     import mmap
     found = set()
+    print "Openined mmap"
+    open(dbName+'.mmap','w').close()
     with open(dbName+'.mmap', "r+b") as f:
         mapf = mmap.mmap(f.fileno(), 0)
         for dictFile in files:
