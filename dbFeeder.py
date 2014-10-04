@@ -50,7 +50,7 @@ elif dbType == 'mmap':
     print "Openined mmap"
     open(dbName+'.mmap','w').close()
     with open(dbName+'.mmap', "r+b") as f:
-        mapf = mmap.mmap(f.fileno(), 0)
+        mapf = mmap.mmap(f.fileno())
         for dictFile in files:
             inFile = open(dictFile,'rb')
             print "Preparing to load file", dictFile, "from pickle"
