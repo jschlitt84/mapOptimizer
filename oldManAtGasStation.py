@@ -121,7 +121,7 @@ pickleIn.close()
 network = struct['network']
 
 distDict = getNet(listed,network,sys.argv[4])
-print distDict
+#print distDict
 #for key,item in distDict.iteritems():
 #	print key,item
 
