@@ -56,6 +56,7 @@ def findDist(network,pts,core,out_q):
     	for key, item in newDistances.iteritems():
     		print p, type(p)
     		print key, type(key)
+    		print newDistances[p],type(newDistances[p])
     		print newDistances[p][key], type(newDistances[p][key])
     		distances[getKey(p,key)] = newDistances[p][key]
     if count%50 == 0:
