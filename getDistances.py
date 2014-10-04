@@ -132,7 +132,22 @@ for i in range(cores):
 
 index = set([str(town) for town in towns])
 
-for i in range(numPts-1):
+for i in range(numTowns):
+	pairs.add(str(pts[i]))
+	iter += 1
+	if iter%100 == 0:
+		print iter,writeTo
+		listOut = open('%s/netSlice%s.txt' % (name,writeTo),"a+b")
+		for line in pairs:
+			listOut.write(line+'\n')
+		listOut.close()
+		pairs = set()
+		writeTo += 1
+		if writeTo == cores:
+			writeTo = 0
+
+#The old, slow as molasses method
+"""for i in range(numPts-1):
 	p1 = pts[i]	
 	for j in range(i,numPts):
 		p2 = pts[j]
@@ -148,7 +163,7 @@ for i in range(numPts-1):
 				pairs = set()
 				writeTo += 1
 				if writeTo == cores:
-					writeTo = 0
+					writeTo = 0"""
 		
 
 
