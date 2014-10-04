@@ -52,13 +52,16 @@ def findDist(network,pts,core,out_q):
     print "Process %s starting run with %s entries" % (core,len(pts))
     pts = [p.replace('\n','') for p in pts if len(p.replace('\n','')) > 1]
     for p in pts:
-    	newDistances = nx.single_source_dijkstra_path_length(network,p)
-    	for key, item in newDistances.iteritems():
-    	    distances[getKey(p,key)] = newDistances[key]
-        count += 1
-	if count%200 == 0:
-		print (datetime.datetime.now()-t1)
-		print 'Core: %s   Count: %s   Percent: %s' % (core,count,count/float(toDo))
+    	try:
+	    	newDistances = nx.single_source_dijkstra_path_length(network,p)
+	    	for key, item in newDistances.iteritems():
+	    	    distances[getKey(p,key)] = newDistances[key]
+	        count += 1
+		if count%10 == 0:
+			print (datetime.datetime.now()-t1)
+			print 'Core: %s   Count: %s   Percent: %s' % (core,count,count/float(toDo))
+	except:
+		print "Unconnected node"
     print "Process %s Distance tabulation complete!" % core
     out_q.put(distances) 
     		
