@@ -66,6 +66,7 @@ def findDist(network,pts,core,out_q):
     distances = dict(); count = 0
     toDo = len(pts)
     print "Process %s starting run with %s entries" % (core,len(pts))
+    pts = [p.replace('\n','') for p in pts if len(p.replace('\n','') > 1]
     for p in pts:
     	newDistances = nx.single_source_dijkstra_path_length(network,p)
     	for key, item in newDistances.iteritems():
