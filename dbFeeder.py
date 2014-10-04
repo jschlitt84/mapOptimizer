@@ -65,11 +65,8 @@ elif dbType == 'mmap':
                     print count
                     mapf.flush()
                 if key not in found:
-                    try:
                         mapf.write(writeIt(key,item))
                         found.add(key)
-                    except:
-                        print count
             print "File mmapping complete\n"
     
 
