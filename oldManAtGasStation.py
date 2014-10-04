@@ -54,11 +54,8 @@ def findDist(network,pts,core,out_q):
     for p in pts:
     	newDistances = nx.single_source_dijkstra_path_length(network,p)
     	for key, item in newDistances.iteritems():
-    		print p, type(p)
-    		print key, type(key)
-    		print newDistances[key],type(newDistances[key])
     		distances[getKey(p,key)] = newDistances[key]
-    if count%50 == 0:
+    if count%200 == 0:
 		print (datetime.datetime.now()-t1)
 		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
