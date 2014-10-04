@@ -120,11 +120,11 @@ def trimNet(network,pt1,pt2,trimRadius):
     yMax = max(pt1[1],pt2[1])+trimRadius
     yMin = min(pt1[1],pt2[1])-trimRadius
     nodeList = [node for node in network.nodes() if inRange(listFromStr(node),pt1,pt2,xMax,xMin,yMax,yMin)]
-    return network.subgraph(nodeList)"""
+    return network.subgraph(nodeList)
 
 
     #Old, slow, & expensive		
-    """distances = dict(); count = 0
+    distances = dict(); count = 0
     toDo = len(pts)
     print "Process %s starting run with %s entries" % (core,len(pts))
     pts = [listFromStr(pt.replace('\n','')) for pt in pts]
@@ -142,9 +142,9 @@ def trimNet(network,pt1,pt2,trimRadius):
 		print (datetime.datetime.now()-t1)
 		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
     print "Process %s Distance tabulation complete!" % core
-    out_q.put(distances) """
+    out_q.put(distances)
     
-"""
+
  def dist(pt1,pt2,pt3): # x3,y3 is the point
     px = pt2[0]-pt1[0]; py = pt2[1]-pt1[1]
     i = px*px + py*py
