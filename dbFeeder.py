@@ -39,4 +39,25 @@ elif dbType == 'dbm':
             db[str(key)] = str(value)
         del loaded
 
+
+elif dbType == 'mmap':
+    
+    def writeIt(key,item):
+        return '%s#%s#' % (key,item)
+        
+    import mmap
+    found = set()
+    with open(dbName+'.mmap', "r+b") as f:
+        mapf = mmap.mmap(f.fileno(), 0)
+        for dictFile in files:
+            inFile = open(dictFile,'rb')
+            print "Preparing to load file", dictFile, "from pickle"
+            loaded = cPickle.load(inFile); inFile.close()
+            for key,item in loaded.iteritems():
+                if key not in found:
+                    mapf.write(writeIt(key,item))
+                    found.add(key)
+            print "File mmapping complete\n"
+    
+
 print "All operations complete"

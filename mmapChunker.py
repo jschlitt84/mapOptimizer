@@ -47,7 +47,7 @@ refs = dict(); found = set()
 print numLines, "found, using", numBlocks, "of size", blockSize
 print refList
 
-outFile = open(expName+'Refs.pickle','w')
+outFile = open('memory/'+expName+'Refs.pickle','w')
 cPickle.dump(refList,outFile)
 quit()
 
