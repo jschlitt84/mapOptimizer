@@ -57,7 +57,12 @@ elif dbType == 'mmap':
             inFile = open(dictFile,'rb')
             print "Preparing to load file", dictFile, "from pickle"
             loaded = cPickle.load(inFile); inFile.close()
+            print "File loaded...."
+            count = 0
             for key,item in loaded.iteritems():
+                count += 1
+                if count%1000:
+                    print count
                 if key not in found:
                     mapf.write(writeIt(key,item))
                     found.add(key)
