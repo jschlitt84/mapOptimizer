@@ -13,18 +13,6 @@ trimWidth = 15
 def listFromStr(text):
     return [int(entry) for entry in list(text.replace('[','').replace(']','').replace('(','').replace(')','').split(','))]
 
-def dist(pt1,pt2,pt3): # x3,y3 is the point
-    px = pt2[0]-pt1[0]; py = pt2[1]-pt1[1]
-    i = px*px + py*py
-    u =  ((pt3[0] - pt1[0]) * px + (pt3[1] - pt1[1]) * py) / float(i)
-    if u > 1:
-        u = 1
-    elif u < 0:
-        u = 0
-    x = pt1[0] + u * px; y = pt1[1] + u * py
-    dx = x - pt3[0]; dy = y - pt3[1]
-    return sqrt(dx*dx + dy*dy)
-
 
 def rank(x1,y1,x2,y2):
     if x1 < x2:
@@ -65,26 +53,6 @@ def findDist(network,pts,core,out_q):
     print "Process %s Distance tabulation complete!" % core
     out_q.put(distances) 
     		
-    #Old, slow, & expensive		
-    """distances = dict(); count = 0
-    toDo = len(pts)
-    print "Process %s starting run with %s entries" % (core,len(pts))
-    pts = [listFromStr(pt.replace('\n','')) for pt in pts]
-    for p in pts:
-    	subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
-    	try:
-	     length = nx.shortest_path_length(subNet,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
-	#else:
-	except Exception: 
-	     length = -1
-	#distances.add(str(rank(p[0],p[1],p[2],p[3]))+' '+str(int(length))) 
-	distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
-	count += 1
-	if count%500 == 0:
-		print (datetime.datetime.now()-t1)
-		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
-    print "Process %s Distance tabulation complete!" % core
-    out_q.put(distances) """
     
 
 def getNet(listed,network,penalty):
@@ -121,6 +89,7 @@ pickleIn.close()
 network = struct['network']
 
 distDict = getNet(listed,network,sys.argv[4])
+
 #print distDict
 #for key,item in distDict.iteritems():
 #	print key,item
@@ -153,4 +122,39 @@ def trimNet(network,pt1,pt2,trimRadius):
     nodeList = [node for node in network.nodes() if inRange(listFromStr(node),pt1,pt2,xMax,xMin,yMax,yMin)]
     return network.subgraph(nodeList)"""
 
+
+    #Old, slow, & expensive		
+    """distances = dict(); count = 0
+    toDo = len(pts)
+    print "Process %s starting run with %s entries" % (core,len(pts))
+    pts = [listFromStr(pt.replace('\n','')) for pt in pts]
+    for p in pts:
+    	subNet = trimNet(network,[p[0],p[1]],[p[2],p[3]],trimRadius)
+    	try:
+	     length = nx.shortest_path_length(subNet,source=str([p[0],p[1]]),target=str([p[2],p[3]]),weight='weight')
+	#else:
+	except Exception: 
+	     length = -1
+	#distances.add(str(rank(p[0],p[1],p[2],p[3]))+' '+str(int(length))) 
+	distances[str(rank(p[0],p[1],p[2],p[3]))] = int(length)
+	count += 1
+	if count%500 == 0:
+		print (datetime.datetime.now()-t1)
+		print 'Core: %s   Count: %s   Length: %s  Percent: %s' % (core,count,length, count/float(toDo))
+    print "Process %s Distance tabulation complete!" % core
+    out_q.put(distances) """
+    
+"""
+ def dist(pt1,pt2,pt3): # x3,y3 is the point
+    px = pt2[0]-pt1[0]; py = pt2[1]-pt1[1]
+    i = px*px + py*py
+    u =  ((pt3[0] - pt1[0]) * px + (pt3[1] - pt1[1]) * py) / float(i)
+    if u > 1:
+        u = 1
+    elif u < 0:
+        u = 0
+    x = pt1[0] + u * px; y = pt1[1] + u * py
+    dx = x - pt3[0]; dy = y - pt3[1]
+    return sqrt(dx*dx + dy*dy)
+"""
 
