@@ -45,7 +45,7 @@ def findDist(network,pts,core,out_q):
 	    	for key, item in newDistances.iteritems():
 	    	    distances[getKey(p,key)] = newDistances[key]
 	        count += 1
-		if count%10 == 0:
+		if count%100 == 0:
 			print (datetime.datetime.now()-t1)
 			print 'Core: %s   Count: %s   Percent: %s' % (core,count,count/float(toDo))
 	except:
