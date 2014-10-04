@@ -51,10 +51,10 @@ elif dbType == 'mmap':
     temp = open(dbName+'.mmap','w')
     temp.write("deboo2014")
     temp.close()
-    with open(dbName+'.mmap', "r+b") as f:
+    with open(dbName+'.mmap', "w") as f:
         mapf = mmap.mmap(f.fileno(),0)
         for dictFile in files:
-            inFile = open(dictFile,'rb')
+            inFile = open(dictFile,'r+b')
             print "Preparing to load file", dictFile, "from pickle"
             loaded = cPickle.load(inFile); inFile.close()
             print "File loaded...."
@@ -63,6 +63,7 @@ elif dbType == 'mmap':
                 count += 1
                 if count%1000:
                     print count
+                    mapf.flush()
                 if key not in found:
                     mapf.write(writeIt(key,item))
                     found.add(key)
