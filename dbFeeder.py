@@ -51,7 +51,7 @@ elif dbType == 'mmap':
     temp = open(dbName+'.mmap','w')
     temp.write("deboo2014")
     temp.close()
-    with open(dbName+'.mmap', "w") as f:
+    with open(dbName+'.mmap', "r+b") as f:
         mapf = mmap.mmap(f.fileno(),0)
         for dictFile in files:
             inFile = open(dictFile,'r+b')
