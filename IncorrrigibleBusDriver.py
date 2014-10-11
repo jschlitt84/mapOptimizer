@@ -101,7 +101,7 @@ distDict = getNet(network,viable,occupied,sys.argv[2])
 
 del network
 
-pickleOut = open('/'.join(sys.argv[1].split('/')[0:-1])+'/DistDict%s.pickle' % sys.argv[3],"wb")
+pickleOut = open('/'.join(sys.argv[1].split('/')[0:-1])+'/DistDictNew.pickle',"wb")
 cPickle.dump(distDict, pickleOut)
 pickleOut.close()
 sleep(3)
