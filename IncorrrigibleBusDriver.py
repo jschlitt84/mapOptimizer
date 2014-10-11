@@ -37,7 +37,7 @@ def findDist(network,viable,occupied,core,out_q):
     t1 = datetime.datetime.now()
     distances = dict(); count = 0
     toDo = len(viable)
-    print "Process %s starting run with %s detinations" % (core,len(pts))
+    print "Process %s starting run with %s destinations" % (core,toDo)
     for rLoc in viable:
     	distances[rLoc] = dict()
     	try:
