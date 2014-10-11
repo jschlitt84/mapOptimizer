@@ -68,6 +68,7 @@ def getNet(network,viable,occupied,penalty):
         block = int(ceil(len(viable)/float(cores)))
         processes = []
         master = set()
+        entries = len(viable)
 	
 	print "Starting execution with %s threads and %s entries" % (cores,entries)
         for i in range(cores):
