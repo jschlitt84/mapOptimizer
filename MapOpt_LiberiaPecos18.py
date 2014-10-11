@@ -18,14 +18,9 @@ from copy import deepcopy
 from math import ceil, sqrt
 from geopy.distance import great_circle, vincenty
 from geopy import geocoders
-from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 import networkx as nx
 import datetime
-import matplotlib.colors as colors
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-import matplotlib.ticker as ticker
 
 import cPickle
 
