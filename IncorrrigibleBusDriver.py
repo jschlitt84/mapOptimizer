@@ -83,7 +83,7 @@ def getNet(network,viable,occupied,penalty):
             p.join()
 	return merged
 
-
+print "loading from pickle"
 pickleIn = open(sys.argv[1],'rb')	
 struct = cPickle.load(pickleIn)
 pickleIn.close()
@@ -92,6 +92,7 @@ network = struct['network']
 viable = struct['viable']
 occupied = struct['occupied']
 
+print "sending for analysis"
 distDict = getNet(network,viable,occupied,sys.argv[2])
 
 #print distDict
