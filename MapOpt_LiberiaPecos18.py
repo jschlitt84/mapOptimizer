@@ -53,7 +53,7 @@ except:
            'pickledRun':'network.pickle',
            'pickledDist':'network.pickle',
            'resourceFile':'WholeCountry/etus.txt',
-           'populationFile':'RevisedGuess/EbolaGuess2.txt',
+           'populationFile':'RevisedGuess/ebolaguess2.txt',
            'roadFile':'WholeCountry/travelnet.txt',
            'exclusionFile':'WholeCountry/etus.txt',
            'useDB':'EbolaMonroviaFull',
