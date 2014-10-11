@@ -64,7 +64,6 @@ def getNet(network,viable,occupied,penalty):
 	"""Return distance stats"""
 	cores = cpu_count()/2
         out_q = Queue()
-	entries = len(listed)
         
         block = int(ceil(len(viable.keys())/float(cores)))
         processes = []
@@ -99,7 +98,7 @@ distDict = getNet(network,viable,occupied,sys.argv[2])
 #for key,item in distDict.iteritems():
 #	print key,item
 
-del listed; del network
+del network
 
 pickleOut = open('/'.join(sys.argv[1].split('/')[0:-1])+'/DistDict%s.pickle' % sys.argv[3],"wb")
 cPickle.dump(distDict, pickleOut)
