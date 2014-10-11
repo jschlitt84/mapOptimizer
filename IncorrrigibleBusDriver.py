@@ -39,13 +39,13 @@ def findDist(network,viable,occupied,core,out_q):
     toDo = len(viable)
     print "Process %s starting run with %s destinations" % (core,toDo)
     for rLoc in viable:
-    	distances[rLoc] = dict()
+    	distances[str(rLoc)] = dict()
     	try:
     		print "Pulling results for resource location:", rLoc
 	    	newDistances = nx.single_source_dijkstra_path_length(network,str(rLoc))
 	    	for pop in occupied:
 	    		try:
-	    			distances[rLoc][pop] = newDistances[str(pop)]
+	    			distances[str(rLoc)][str(pop)] = newDistances[str(pop)]
 	    		except:
 	    			None
 	        count += 1
