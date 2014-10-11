@@ -36,7 +36,7 @@ def findDist(network,viable,occupied,core,out_q):
     
     t1 = datetime.datetime.now()
     distances = dict(); count = 0
-    toDo = len(pts)
+    toDo = len(viable)
     print "Process %s starting run with %s detinations" % (core,len(pts))
     for rLoc in viable:
     	distances[rLoc] = dict()
@@ -73,7 +73,7 @@ def getNet(network,viable,occupied,penalty):
 	print "Starting execution with %s threads and %s entries" % (cores,entries)
         for i in range(cores):
 	    pts = viable[block*i:block*(i+1)]
-            p = Process(target = findDist, args = (network,viable,occupied,i,out_q))
+            p = Process(target = findDist, args = (network,pts,occupied,i,out_q))
             processes.append(p)
             p.start()
             merged = {}
