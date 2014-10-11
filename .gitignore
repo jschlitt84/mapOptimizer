@@ -2,5 +2,7 @@
 dbFeed/*.pickle
 *.tar
 */*.tar
-
+RevisedGuess/*
+WholeCountry/*
 *.pickle
+*.7z
