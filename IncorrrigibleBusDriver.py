@@ -101,7 +101,7 @@ distDict = getNet(network,viable,occupied,sys.argv[2])
 
 del network
 
-pickleOut = open('DistDictNew.pickle',"wb")
+pickleOut = open('/home/NDSSL/study/mapOptimizer/DistDictNew.pickle',"wb")
 cPickle.dump(distDict, pickleOut)
 pickleOut.close()
 sleep(3)
