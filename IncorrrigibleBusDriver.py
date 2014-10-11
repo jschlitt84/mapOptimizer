@@ -65,7 +65,7 @@ def getNet(network,viable,occupied,penalty):
 	cores = cpu_count()/2
         out_q = Queue()
         
-        block = int(ceil(len(viable.keys())/float(cores)))
+        block = int(ceil(len(viable)/float(cores)))
         processes = []
         master = set()
 	
