@@ -30,7 +30,7 @@ def getKey(key1,key2):
 	return str(rank(pt1[0],pt1[1],pt2[0],pt2[1]))
 	
 	
-def findDist(network,viable,occupied,pts,core,out_q):
+def findDist(network,viable,occupied,core,out_q):
     #solitary=[ n for n,d in network.degree_iter(with_labels=True) if d==0 ]
     #network.delete_nodes_from(solitary)
     
@@ -38,18 +38,18 @@ def findDist(network,viable,occupied,pts,core,out_q):
     distances = dict(); count = 0
     toDo = len(pts)
     print "Process %s starting run with %s detinations" % (core,len(pts))
-    for p in pts:
-    	distances[p] = dict()
+    for rLoc in viable:
+    	distances[rLoc] = dict()
     	try:
-    		print "Pulling results for resource location:", p
-	    	newDistances = nx.single_source_dijkstra_path_length(network,str(p))
+    		print "Pulling results for resource location:", rLoc
+	    	newDistances = nx.single_source_dijkstra_path_length(network,str(rLoc))
 	    	for pop in occupied:
 	    		try:
-	    			distances[p][key] = newDistances[str(pop)]
+	    			distances[rLoc][pop] = newDistances[str(pop)]
 	    		except:
 	    			None
 	        count += 1
-	        print "\tFinished for resource", p
+	        print "\tFinished for resource", rLoc
 		if count%10 == 0:
 			print (datetime.datetime.now()-t1)
 			print 'Core: %s   Count: %s   Percent: %s' % (core,count,count/float(toDo))
@@ -71,8 +71,8 @@ def getNet(network,viable,occupied,penalty):
 	
 	print "Starting execution with %s threads and %s entries" % (cores,entries)
         for i in range(cores):
-	    pts = viable.keys()[block*i:block*(i+1)]
-            p = Process(target = findDist, args = (network,viable,occupied,pts,i,out_q))
+	    pts = viable[block*i:block*(i+1)]
+            p = Process(target = findDist, args = (network,viable,occupied,i,out_q))
             processes.append(p)
             p.start()
             merged = {}
