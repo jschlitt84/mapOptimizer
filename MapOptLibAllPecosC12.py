@@ -841,7 +841,7 @@ def denature(pLocs,rLocs,meanTilt,cfg,
 stagnantLimit = 2000
 best = 10000000
 showEvery = 100
-cfg['threads'] = 4
+cfg['threads'] = 2
 
 rLocs,tracker,best,bestStats = denature(pLocs,rLocs,meanTilt,cfg,
                               stopLimit = stagnantLimit,
