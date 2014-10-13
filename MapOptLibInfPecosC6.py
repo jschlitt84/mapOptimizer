@@ -857,7 +857,7 @@ cPickle.dump(tracker,fileOut)
 fileOut.close()
 print "Saved tracker to file"
 
-outFile = open('ResourceLocsAll12.txt','w')
+outFile = open('ResourceLocsInf6.txt','w')
 for location in sorted(ptsToText(rLocs,cfg,precision = 10)):
     print location
     outFile.write(str(location)+'\n')
