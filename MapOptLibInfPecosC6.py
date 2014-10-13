@@ -486,12 +486,6 @@ else:
 
 # <codecell>
 
-outDict = {'occupied':cfg['extras']['occupied'],
-           'viable':cfg['extras']['postExclusion']+cfg['extras']['permanent'],
-           'network':cfg['extras']['network']}
-outFile = open('RunData.pickle','w')
-cPickle.dump(outDict,outFile)
-outFile.close()
 
 # <headingcell level=3>
 
@@ -592,7 +586,7 @@ def rank(x1,y1,x2,y2):
 
 # <codecell>
 
-inFile = open('DistDictAllNew.pickle','rb')
+inFile = open('DistDictNew.pickle','rb')
 cfg['extras']['preCalculated'] = cPickle.load(inFile)
 inFile.close()
 
